@@ -1,0 +1,84 @@
+\documentclass[cn,hazy,blue,14pt,screen,normal]{elegantnote}
+\title{数字信号处理(Digital Signal Process)笔记}
+\author{Jin Huang}
+\usepackage{array}
+\usepackage{ctex}
+
+\begin{document}
+\maketitle
+\newpage
+\section{线性时不变(LTI)系统}
+\subsection{线型时不变系统的定义及响应}
+线性时不变系统的特性：可加权、可叠加、可时移
+\begin{equation}
+    y(n) = ay_1(n)+by_2(n-n_0) \label{1}
+\end{equation}
+\textbf{线性时不变系统的定义：}
+\begin{itemize}
+    \item 同时满足线型和时不变性的系统。
+\end{itemize}
+\textbf{系统的输出响应分类：}
+\begin{itemize}
+    \item[1. ]  零状态相应$y_{zs}(n)$：仅由输入序列在观察时刻之后产生的相应。(线性时不变的)
+    \item[2. ]  零输入相应$y_{zi}(n)$：仅由初始状态引起的相应。（非线性的）
+    \item[3. ]  全响应$y(n) = y_{zs}(n)+y_{zi}(n)$。（非线性的）
+\end{itemize}
+\begin{equation}
+    y(n) = x(n) + b \label{2}
+\end{equation}
+公式\ref{2}中，$x(n)$表示输入，$b$表示初始状态。
+
+\subsection{单位脉冲响应}
+\textbf{定义：}当系统输入为$\delta(n)$时，系统的零状态相应称为\emph{单位脉冲响应}，记为$h(n)$。
+
+\qquad 对于$y(n) = T[x(n)]$ \qquad 有$h(n) = T[\delta(n)]$
+
+换言之，对于一个线性时不变系统，输入一个单位脉冲序列$\delta(n)$，输出一个单位脉冲相应$h(n)\ref{3a}$；
+如果输入序列移位，则输出响应也对应移位\ref{3b}；如果输入加权，则输出相应也对应加权\ref{3c}。
+\begin{subequations}
+\begin{align}
+    \delta(n) = h(n) \label{3a} \\
+    \delta(n-1) = h(n-1) \label{3b} \\
+    a \delta(n-2) = ah(n-1) \label{3c}
+\end{align}
+\end{subequations}
+
+\subsection{线性时不变系统的输入输出运算}
+在\textbf{线型时不变系统}中，有一乘法器，乘法器的两个输出分别为$x(n)$和$p(n) = \sum\limits^{+\infty}_{m=-\infty}{\delta(n-m)}$。依次考虑各项
+$$x(n)p(n) = y(n)$$
+$$p(n) = \sum\limits^{+\infty}_{m=-\infty}{\delta(n-m)}$$
+\begin{table}[htbp]
+    \centering
+    \caption{系统输入输出参照}
+    \begin{tabular}{lll}
+        \hline
+        m   &$p(n)$     &输出\\
+        \hline
+        m=0 &$\delta(n)$    & $x(0)h(n)$\\
+        m=1 &$\delta(n-1)$  & $x(1)h(n-1)$\\
+        m=2 &$\delta(n-2)$  & $x(2)h(n-2)$\\
+        $\dots$ & $\dots$ &$\dots$ \\
+        \hline
+            & $\sum\limits^{+\infty}_{m=-\infty}{\delta(n-m)}$ & $\sum\limits^{+\infty}_{m=-\infty}{x(m)h(n-m)}$\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{equation}
+    y(n) = x(n)*h(n) = \sum\limits^{+\infty}_{m = -\infty}{x(m)h(n-m)} \label{4}
+\end{equation}
+
+由公式\ref{4}可看出，序列输入系统的运算是卷积和。
+
+\begin{itemize}
+    \item [1)] 线性时不变系统的输入输出运算关系
+            $$y(n) = x(n)*h(n)$$
+            用卷积和运算描述系统输入输出关系的注意事项：
+            \begin{itemize}
+                \item [(1)]系统必须是线性时不变系统
+                \item [(2)]所求输出为系统的零状态相应
+            \end{itemize}
+    \item [2)] 单位脉冲响应可以描述线型时不变系统的零状态响应特征
+\end{itemize}
+
+\end{document}
